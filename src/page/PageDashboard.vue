@@ -16,7 +16,7 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      showFormCost: true
+      showFormCost: false
     }
   },
   components: {

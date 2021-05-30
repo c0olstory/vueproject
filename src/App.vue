@@ -1,9 +1,13 @@
 <template>
   <div id='app' :class="[$style.app]">
     <header>
-      <router-link to="/dashboard/1">Dashboard</router-link>
-      <router-link to="/add/payment/Food">add</router-link>
-      <router-link to="/notfound">404</router-link>
+      <nav :class="[$style.nav]">
+        <router-link :class="[$style.nav__link]" to="/dashboard">Dashboard</router-link>
+        <router-link :class="[$style.nav__link]" to="/dashboard/add/payment/Food?value=200">add Food</router-link>
+        <router-link :class="[$style.nav__link]" to="/dashboard/add/payment/Transport?value=50">add Transport</router-link>
+        <router-link :class="[$style.nav__link]" to="/dashboard/add/payment/Entertainment?value=2000">add Entertainment</router-link>
+        <router-link :class="[$style.nav__link]" to="/notfound">404</router-link>
+      </nav>
     </header>
     <h1 :class="[$style.app__header]">My personal costs</h1>
     <main>
@@ -59,5 +63,21 @@ export default {
   flex-direction: column;
   font-family: "Arial";
   color: #000;
+}
+.nav {
+  display: flex;
+  &__link {
+    color: #000;
+    margin: 0 10px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      color: #84c8ea;
+    }
+  }
 }
 </style>
