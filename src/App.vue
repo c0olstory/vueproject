@@ -1,8 +1,10 @@
 <template>
   <div id='app' :class="[$style.app]">
     <header>
-      <router-link to="/dashboard/1">Dashboard</router-link>
-      <router-link to="/add/payment/Food">add</router-link>
+      <router-link to="/dashboard">Dashboard</router-link>
+      <router-link to="/dashboard/add/payment/Food?value=200">add Food</router-link>
+      <router-link to="/dashboard/add/payment/Transport?value=50">add Transport</router-link>
+      <router-link to="/dashboard/add/payment/Entertainment?value=2000">add Entertainment</router-link>
       <router-link to="/notfound">404</router-link>
     </header>
     <h1 :class="[$style.app__header]">My personal costs</h1>

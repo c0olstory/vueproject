@@ -9,19 +9,29 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
-    // {
-    //   path: '/dashboard',
-    //   name: 'dashboard',
-    //   component: PageDashboard
-    // },
     {
-      path: '/dashboard/:page',
+      path: '/dashboard',
       name: 'dashboard',
       component: PageDashboard
     },
     {
-      path: '/add/payment/:category',
-      name: 'dashboard',
+      path: '/dashboard/:page',
+      name: 'dashboardPage',
+      component: PageDashboard
+    },
+    {
+      path: '/dashboard/add/payment/:category',
+      name: 'dashboardCategory',
+      component: PageDashboard
+    },
+    // {
+    //   path: '/dashboard/add/payment/*=:price',
+    //   name: 'dashboardPrice',
+    //   component: PageDashboard
+    // },
+    {
+      path: '/dashboard/add/payment*',
+      name: 'dashboardAll',
       component: PageDashboard
     },
     {

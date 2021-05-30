@@ -52,13 +52,19 @@ export default {
       return this.getPaymentsList.slice(amountItems * (page - 1), amountItems * (page - 1) + amountItems)
     }
   },
+  watch: {
+    '$route.path': function () {
+      this.page = this.$route.params.page
+    }
+  },
   mounted () {
-    if (+this.$route.params.page) {
+    if (+(this.$route.params.page)) {
       this.page = +this.$route.params.page
     } else {
-      this.page = 3
+      this.page = 3 // 3 страницу сделал, чтобы было сразу видно добаление
     }
-    console.log(+this.$route.params.page, 'rout param')
+    // this.page = +(this.$route.params.page)
+    console.log(this.page, 'page')
   }
 }
 </script>

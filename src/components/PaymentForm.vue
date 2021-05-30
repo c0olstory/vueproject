@@ -1,19 +1,20 @@
 <template>
   <div :class="[$style.paymentform]">
-    <input :class="[$style.paymentform__input]" placeholder="Date" v-model="date">
-    <select :class="[$style.paymentform__input]" v-model="category">
-      <option disabled value="">Выберите один из вариантов</option>
-      <option v-for="(option, index) in getCategoryList" :key="index" :value="option">{{ option }}</option>
-    </select>
-    <input :class="[$style.paymentform__input]" placeholder="Price" v-model.number="price">
-    <button :class="[$style.paymentform__button]" @click="save">
-      Add
-      <span :class="[$style.paymentform__span]">+</span>
-    </button>
-  </div>
+      <input :class="[$style.paymentform__input]" placeholder="Date" v-model="date">
+      <select :class="[$style.paymentform__input]" v-model="category">
+        <option disabled value="">Выберите один из вариантов</option>
+        <option v-for="(option, index) in getCategoryList" :key="index" :value="option">{{ option }}</option>
+      </select>
+      <input :class="[$style.paymentform__input]" placeholder="Price" v-model.number="price">
+      <button :class="[$style.paymentform__button]" @click="save">
+        Add
+        <span :class="[$style.paymentform__span]">+</span>
+      </button>
+    </div>
 </template>
 
 <script>
+
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
   data () {
@@ -35,8 +36,8 @@ export default {
         category: this.category,
         price: this.price
       }
+      this.$emit('showNewCostForm', !this.show)
       this.$store.commit('addData', data) //  в методичке эта строка выглядит как this.commit('addData', data), но у меня она не работает. почему?
-      // а при обновлении страницы, данные которые мы добавили пропадают. это нормально?
     }
   },
   computed: {
@@ -46,7 +47,7 @@ export default {
     getDateUser () {
       const date = new Date()
       let day = date.getDate()
-      let month = date.getMonth()
+      let month = date.getMonth() // я только не понял почему месяц берется на 1 меньше чем есть
       const year = date.getFullYear()
       if (day < 10) {
         day = `0${day}`
@@ -63,6 +64,12 @@ export default {
       'loadCategories'
     ])
   },
+  watch: {
+    '$route.path': function () {
+      this.category = this.$route.params.category
+      this.price = this.$route.query.value
+    }
+  },
   mounted () {
     // Сделал все как в методичке и выдает ошибку loadCategories не функция, почему?
     // if (!this.getCategoryList.length) {
@@ -70,8 +77,7 @@ export default {
     // }
     this.date = this.getDateUser
     this.category = this.$route.params.category
-    console.log(this.$route, 'form category')
-    // this.price = this.$route.params.price
+    this.price = this.$route.query.value
   }
 }
 </script>
